@@ -25,17 +25,31 @@ curl -fsSL https://raw.githubusercontent.com/adintent999-creator/AI/main/termux-
 
 ব্যস! সম্পূর্ণ সেটআপ অটোমেটিক হয়ে যাবে। ✅
 
+## ✨ এই সেটআপে কী আছে (What you get)
+
+- **ইডেম্পোটেন্ট** — একই কমান্ড বারবার চালানো নিরাপদ; যা ইতিমধ্যে হয়েছে তা skip করে।
+- **Self-verifying** — শেষে automatic health check চলে।
+- **Architecture & Termux validation** — ভুল পরিবেশে চালালে পরিষ্কার error দেয়।
+- **Wake-lock** — Android যাতে background-এ ollama kill না করে।
+- **Retry logic** — flaky network-এ exponential backoff দিয়ে আবার চেষ্টা করে।
+- **Safe JSON** — `ollama-api` কমান্ড `jq` দিয়ে escape করে, তাই quote-ওয়ালা prompt-এ ভাঙে না।
+- **Log + PID file** — `~/.ollama-runtime/` এ background সার্ভার ট্র্যাক করা হয়।
+- **Minimal deps** — শুধু যা দরকার: `proot-distro curl wget git python jq`।
+
 ## 📌 সেটআপের পর ব্যবহার (Usage After Setup)
 
 | কমান্ড | কাজ |
 |--------|------|
-| `ollama-start` | Ollama সার্ভার চালু করুন |
+| `ollama-start` | Ollama সার্ভার background-এ চালু করুন (idempotent) |
 | `ollama-stop` | Ollama সার্ভার বন্ধ করুন |
+| `ollama-status` | সার্ভার চলছে কিনা দেখুন |
+| `ollama-logs` | live সার্ভার লগ দেখুন (tail -F) |
 | `ollama-chat` | tinyllama মডেলের সাথে চ্যাট করুন |
 | `ollama-chat phi3:mini` | phi3 মডেলের সাথে চ্যাট করুন |
 | `ollama-pull <model>` | নতুন মডেল ডাউনলোড করুন |
 | `ollama-list` | ইনস্টল করা মডেল দেখুন |
-| `ollama-api` | REST API টেস্ট করুন |
+| `ollama-api <model> "<prompt>"` | REST API কল (jq দিয়ে safe) |
+| `ollama-uninstall` | Ollama + Ubuntu + সব মডেল মুছে ফেলুন |
 
 ## 📱 অ্যান্ড্রয়েডের জন্য প্রস্তাবিত মডেল
 
@@ -91,9 +105,12 @@ print(response.message.content)
 |---------|--------|
 | `proot-distro: command not found` | `pkg install proot-distro` চালান |
 | মডেল খুব ধীর চলছে | ছোট মডেল ব্যবহার করুন (tinyllama) |
-| স্টোরেজ কম | `ollama-list` দিয়ে অপ্রয়োজনীয় মডেল মুছুন |
-| সার্ভার চালু হচ্ছে না | `ollama-stop` দিয়ে আগে বন্ধ করে আবার `ollama-start` দিন |
-| Termux ক্র্যাশ করছে | Termux notification-এ "Acquire wakelock" চালু করুন |
+| স্টোরেজ কম | `ollama list` → `ollama rm <model>` দিয়ে অপ্রয়োজনীয় মডেল মুছুন |
+| সার্ভার চালু হচ্ছে না | `ollama-logs` চালিয়ে error দেখুন, তারপর `ollama-stop && ollama-start` |
+| `pkg update` ব্যর্থ | `termux-change-repo` দিয়ে মিরর পরিবর্তন করুন |
+| `curl: (7) Failed to connect` | ইন্টারনেট চেক করুন; VPN চালু থাকলে বন্ধ করে চেষ্টা করুন |
+| Termux ক্র্যাশ করছে | `termux-wake-lock` চালান (স্ক্রিপ্ট automatic করে) |
+| একবার ফেইল হলে | শুধু `curl ... | bash` কমান্ডটি আবার চালান — idempotent |
 
 ## 📖 আরও তথ্য
 
