@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="bn" data-lang="bn">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NirmanBazar · নির্মাণবাজার — Bangladesh's Premier Construction Marketplace</title>
+<meta name="description" content="NirmanBazar — Bangladesh's premium marketplace for construction materials, sanitary ware, tiles, doors, electrical, paint and more. বাংলাদেশের সর্বশ্রেষ্ঠ নির্মাণ সামগ্রীর বাজার।" />
+<meta name="theme-color" content="#0b1a2b" />
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230b1a2b'/><text x='50%25' y='56%25' text-anchor='middle' fill='%23d4a84b' font-family='serif' font-size='36' font-weight='700'>N</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<div class="topbar">
+  <div class="container topbar__inner">
+    <div class="topbar__left">
+      <span>📞 <a href="tel:+8801700000000">+880 1700-000000</a></span>
+      <span class="hide-sm">✉️ <a href="mailto:hello@nirmanbazar.com">hello@nirmanbazar.com</a></span>
+    </div>
+    <div class="topbar__right">
+      <span class="hide-sm">🚚 <span data-i18n="topbar.delivery">সারা বাংলাদেশে হোম ডেলিভারি</span></span>
+      <button class="lang-toggle" id="langToggle" aria-label="Language toggle">
+        <span class="lang-toggle__bn">বাং</span>
+        <span class="lang-toggle__en">EN</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="#" class="brand" aria-label="NirmanBazar">
+      <span class="brand__logo" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="44" height="44">
+          <defs>
+            <linearGradient id="lg1" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#e4c07a"/>
+              <stop offset="1" stop-color="#b4862d"/>
+            </linearGradient>
+          </defs>
+          <rect x="2" y="2" width="44" height="44" rx="12" fill="#0b1a2b"/>
+          <path d="M12 34 L12 14 L20 14 L28 26 L28 14 L36 14 L36 34 L28 34 L20 22 L20 34 Z" fill="url(#lg1)"/>
+        </svg>
+      </span>
+      <span class="brand__text">
+        <span class="brand__name">NirmanBazar</span>
+        <span class="brand__name-bn">নির্মাণবাজার</span>
+      </span>
+    </a>
+
+    <form class="search" id="searchForm" role="search">
+      <input type="search" id="searchInput" placeholder="পণ্য খুঁজুন... / Search products..." aria-label="Search" />
+      <button type="submit" aria-label="Search">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+    </form>
+
+    <nav class="nav-actions">
+      <a href="#sections" class="btn btn-ghost" data-i18n="nav.categories">ক্যাটাগরি</a>
+      <a href="#about" class="btn btn-ghost hide-md" data-i18n="nav.about">আমাদের সম্পর্কে</a>
+      <a href="#contact" class="btn btn-primary" data-i18n="nav.contact">যোগাযোগ</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="container hero__inner">
+    <div class="hero__content">
+      <span class="hero__badge" data-i18n="hero.badge">✦ বাংলাদেশের #১ নির্মাণ সামগ্রীর বাজার</span>
+      <h1 class="hero__title">
+        <span data-i18n="hero.title_1">প্রিমিয়াম নির্মাণ সামগ্রী</span><br/>
+        <span class="grad-text" data-i18n="hero.title_2">এক ছাদের নিচে</span>
+      </h1>
+      <p class="hero__subtitle" data-i18n="hero.subtitle">
+        সিমেন্ট থেকে দরজা, টাইলস থেকে স্যানিটারি — সবকিছুই সর্বোচ্চ মানে, সরাসরি যাচাই-করা বিক্রেতাদের কাছ থেকে।
+      </p>
+      <div class="hero__cta">
+        <a href="#sections" class="btn btn-primary btn-lg" data-i18n="hero.cta1">ক্যাটাগরি দেখুন</a>
+        <a href="#featured" class="btn btn-outline btn-lg" data-i18n="hero.cta2">ফিচার্ড পণ্য</a>
+      </div>
+      <div class="hero__stats" id="heroStats">
+        <div class="hero__stat"><strong id="stat-products">1,275</strong><span data-i18n="hero.stat.products">পণ্য</span></div>
+        <div class="hero__stat"><strong id="stat-categories">145</strong><span data-i18n="hero.stat.categories">ক্যাটাগরি</span></div>
+        <div class="hero__stat"><strong>64</strong><span data-i18n="hero.stat.districts">জেলায় সেবা</span></div>
+        <div class="hero__stat"><strong>100%</strong><span data-i18n="hero.stat.verified">ভেরিফাইড বিক্রেতা</span></div>
+      </div>
+    </div>
+    <div class="hero__visual" aria-hidden="true">
+      <div class="hero__card hero__card--1"></div>
+      <div class="hero__card hero__card--2"></div>
+      <div class="hero__card hero__card--3"></div>
+      <div class="hero__orb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUST BAR ===== -->
+<section class="trust">
+  <div class="container trust__grid">
+    <div class="trust__item"><span class="trust__icon">✓</span><div><strong data-i18n="trust.1t">যাচাইকৃত মান</strong><small data-i18n="trust.1s">সকল পণ্যের গুণগত মান নিশ্চিত</small></div></div>
+    <div class="trust__item"><span class="trust__icon">★</span><div><strong data-i18n="trust.2t">সেরা দাম</strong><small data-i18n="trust.2s">বাজারের সর্বোত্তম মূল্য গ্যারান্টি</small></div></div>
+    <div class="trust__item"><span class="trust__icon">🚚</span><div><strong data-i18n="trust.3t">দ্রুত ডেলিভারি</strong><small data-i18n="trust.3s">সারাদেশে সময়মত পৌঁছে দেই</small></div></div>
+    <div class="trust__item"><span class="trust__icon">♥</span><div><strong data-i18n="trust.4t">২৪/৭ সাপোর্ট</strong><small data-i18n="trust.4s">যেকোনো সহায়তায় আমাদের পাশে</small></div></div>
+  </div>
+</section>
+
+<!-- ===== SECTIONS GRID ===== -->
+<section class="section" id="sections">
+  <div class="container">
+    <div class="section__head">
+      <h2 data-i18n="sections.title">শ্রেণীবিন্যাস</h2>
+      <p data-i18n="sections.subtitle">আপনার প্রয়োজন অনুযায়ী ক্যাটাগরি নির্বাচন করুন</p>
+    </div>
+    <div class="sections-grid" id="sectionsGrid"></div>
+  </div>
+</section>
+
+<!-- ===== CATALOG ===== -->
+<section class="section section--alt" id="catalog">
+  <div class="container">
+    <div class="catalog__head">
+      <div>
+        <h2 id="catalogTitle" data-i18n="catalog.title">সকল পণ্য</h2>
+        <p id="catalogCount" class="muted"></p>
+      </div>
+      <div class="catalog__filters">
+        <select id="sectionFilter" class="select">
+          <option value="all" data-i18n="catalog.all">সকল বিভাগ</option>
+        </select>
+        <select id="sortSelect" class="select">
+          <option value="default" data-i18n="catalog.sort.default">ডিফল্ট</option>
+          <option value="price_asc" data-i18n="catalog.sort.price_asc">দাম: কম থেকে বেশি</option>
+          <option value="price_desc" data-i18n="catalog.sort.price_desc">দাম: বেশি থেকে কম</option>
+          <option value="title_asc" data-i18n="catalog.sort.title">নাম (A→Z)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="chips" id="chipsRow"></div>
+
+    <div class="grid" id="productGrid"></div>
+
+    <div class="load-more-wrap">
+      <button id="loadMore" class="btn btn-outline" data-i18n="catalog.load_more">আরও দেখুন</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURED ===== -->
+<section class="section" id="featured">
+  <div class="container">
+    <div class="section__head">
+      <h2 data-i18n="featured.title">ফিচার্ড কালেকশন</h2>
+      <p data-i18n="featured.subtitle">আমাদের নির্বাচিত সেরা পণ্যসমূহ</p>
+    </div>
+    <div class="grid grid--featured" id="featuredGrid"></div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="section section--dark" id="about">
+  <div class="container about__grid">
+    <div>
+      <span class="eyebrow" data-i18n="about.eye">আমাদের সম্পর্কে</span>
+      <h2 data-i18n="about.title">নির্মাণকে করি সহজ ও বিশ্বস্ত</h2>
+      <p data-i18n="about.p1">NirmanBazar — নির্মাণবাজার — বাংলাদেশের প্রিমিয়াম অনলাইন নির্মাণ সামগ্রীর মার্কেটপ্লেস। আমরা বিশ্বমানের গুণমান, স্বচ্ছ মূল্য এবং সময়মত ডেলিভারি নিশ্চিত করে আপনার প্রতিটি প্রকল্পের পাশে থাকি।</p>
+      <p data-i18n="about.p2">আমাদের প্ল্যাটফর্মে রয়েছে ১,২০০+ যাচাইকৃত পণ্য, ১৪৫+ ক্যাটাগরি এবং সারা বাংলাদেশের নির্ভরযোগ্য বিক্রেতা। ছোট মেরামত থেকে বড় প্রকল্প — সবকিছুর জন্য এক নাম NirmanBazar।</p>
+      <div class="about__features">
+        <div>✓ <span data-i18n="about.f1">যাচাইকৃত সরবরাহকারী</span></div>
+        <div>✓ <span data-i18n="about.f2">স্বচ্ছ মূল্য তালিকা</span></div>
+        <div>✓ <span data-i18n="about.f3">বাল্ক ও রিটেইল অর্ডার</span></div>
+        <div>✓ <span data-i18n="about.f4">সারাদেশে ডেলিভারি</span></div>
+      </div>
+    </div>
+    <div class="about__visual">
+      <div class="about__card">
+        <h3>★ 4.9/5</h3>
+        <p data-i18n="about.rating">গ্রাহক সন্তুষ্টি</p>
+      </div>
+      <div class="about__card">
+        <h3>10,000+</h3>
+        <p data-i18n="about.orders">সফল ডেলিভারি</p>
+      </div>
+      <div class="about__card">
+        <h3>500+</h3>
+        <p data-i18n="about.sellers">নিবন্ধিত বিক্রেতা</p>
+      </div>
+      <div class="about__card">
+        <h3>24/7</h3>
+        <p data-i18n="about.support">গ্রাহক সেবা</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section" id="contact">
+  <div class="container contact__grid">
+    <div class="contact__info">
+      <span class="eyebrow" data-i18n="contact.eye">যোগাযোগ</span>
+      <h2 data-i18n="contact.title">আজই আমাদের সাথে কথা বলুন</h2>
+      <p data-i18n="contact.sub">প্রকল্পের জন্য পরামর্শ, বাল্ক অর্ডার বা পণ্যের বিশদ জানতে আমাদের সাথে যোগাযোগ করুন।</p>
+      <ul class="contact__list">
+        <li>📞 <a href="tel:+8801700000000">+880 1700-000000</a></li>
+        <li>✉️ <a href="mailto:hello@nirmanbazar.com">hello@nirmanbazar.com</a></li>
+        <li>📍 <span data-i18n="contact.addr">ঢাকা, বাংলাদেশ</span></li>
+        <li>⏰ <span data-i18n="contact.hours">সকাল ৯টা — রাত ৯টা (প্রতিদিন)</span></li>
+      </ul>
+    </div>
+    <form class="contact__form" onsubmit="event.preventDefault(); alert('ধন্যবাদ! আমরা শীঘ্রই যোগাযোগ করব।'); this.reset();">
+      <div class="form-row">
+        <input required placeholder="আপনার নাম / Your Name" />
+        <input required type="tel" placeholder="মোবাইল নম্বর / Phone" />
+      </div>
+      <input type="email" placeholder="ইমেইল (ঐচ্ছিক)" />
+      <textarea rows="4" required placeholder="আপনার প্রশ্ন বা চাহিদা লিখুন..."></textarea>
+      <button class="btn btn-primary btn-lg" type="submit" data-i18n="contact.send">বার্তা পাঠান</button>
+    </form>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <div class="brand brand--footer">
+        <span class="brand__logo">
+          <svg viewBox="0 0 48 48" width="40" height="40"><rect x="2" y="2" width="44" height="44" rx="12" fill="#d4a84b"/><path d="M12 34 L12 14 L20 14 L28 26 L28 14 L36 14 L36 34 L28 34 L20 22 L20 34 Z" fill="#0b1a2b"/></svg>
+        </span>
+        <span class="brand__text">
+          <span class="brand__name">NirmanBazar</span>
+          <span class="brand__name-bn">নির্মাণবাজার</span>
+        </span>
+      </div>
+      <p class="footer__about" data-i18n="footer.about">বাংলাদেশের বিশ্বস্ত নির্মাণ সামগ্রীর মার্কেটপ্লেস। প্রিমিয়াম গুণমান, সেরা দাম, নিশ্চিত ডেলিভারি।</p>
+    </div>
+    <div>
+      <h4 data-i18n="footer.shop">দোকান</h4>
+      <ul id="footerSections"></ul>
+    </div>
+    <div>
+      <h4 data-i18n="footer.links">দ্রুত লিংক</h4>
+      <ul>
+        <li><a href="#about" data-i18n="nav.about">আমাদের সম্পর্কে</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">যোগাযোগ</a></li>
+        <li><a href="#sections" data-i18n="nav.categories">ক্যাটাগরি</a></li>
+        <li><a href="#featured" data-i18n="featured.title">ফিচার্ড</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-i18n="footer.contact">যোগাযোগ</h4>
+      <ul>
+        <li>📞 +880 1700-000000</li>
+        <li>✉️ hello@nirmanbazar.com</li>
+        <li>📍 <span data-i18n="contact.addr">ঢাকা, বাংলাদেশ</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container footer__bottom-inner">
+      <span>© <span id="year"></span> NirmanBazar · নির্মাণবাজার. <span data-i18n="footer.rights">All rights reserved.</span></span>
+      <span>Made with ♥ in Bangladesh</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== PRODUCT MODAL ===== -->
+<div class="modal" id="productModal" aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal__close" data-close aria-label="Close">×</button>
+    <div class="modal__content" id="modalContent"></div>
+  </div>
+</div>
+
+<!-- Back-to-top -->
+<button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>
