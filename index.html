@@ -4,13 +4,64 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>NirmanBazar · নির্মাণবাজার — Bangladesh's Premier Construction Marketplace</title>
-<meta name="description" content="NirmanBazar — Bangladesh's premium marketplace for construction materials, sanitary ware, tiles, doors, electrical, paint and more. বাংলাদেশের সর্বশ্রেষ্ঠ নির্মাণ সামগ্রীর বাজার।" />
+<meta name="description" content="NirmanBazar — বাংলাদেশের সর্বশ্রেষ্ঠ নির্মাণ সামগ্রীর মার্কেটপ্লেস। ১,২৭৫+ পণ্য, ১৪৫+ ক্যাটাগরি — সিমেন্ট, পেইন্ট, স্যানিটারি, টাইলস, দরজা, ইলেকট্রিক্যাল, রান্নাঘর, পাইপ, সরঞ্জাম এক জায়গায়। কোটেশন বানান নিজের কোম্পানির লোগো ও নামে।" />
+<meta name="keywords" content="construction materials Bangladesh, নির্মাণ সামগ্রী, sanitary ware, paint, tiles, doors, electrical, কোটেশন, quotation, bulk order, RFQ, BSRM, Asian Paints, Berger, Hafele" />
 <meta name="theme-color" content="#0b1a2b" />
-<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230b1a2b'/><text x='50%25' y='56%25' text-anchor='middle' fill='%23d4a84b' font-family='serif' font-size='36' font-weight='700'>N</text></svg>" />
+<meta name="author" content="NirmanBazar" />
+<meta name="robots" content="index,follow" />
+<link rel="canonical" href="/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="NirmanBazar · নির্মাণবাজার — বাংলাদেশের প্রিমিয়াম নির্মাণ সামগ্রী" />
+<meta property="og:description" content="১,২৭৫+ যাচাইকৃত নির্মাণ পণ্য এক ছাদের নিচে। নিজের কোম্পানির লোগো সহ কোটেশন বানান।" />
+<meta property="og:image" content="assets/img/og-image.svg" />
+<meta property="og:locale" content="bn_BD" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta property="og:site_name" content="NirmanBazar" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="NirmanBazar · নির্মাণবাজার" />
+<meta name="twitter:description" content="বাংলাদেশের প্রিমিয়াম নির্মাণ সামগ্রীর মার্কেটপ্লেস" />
+<meta name="twitter:image" content="assets/img/og-image.svg" />
+
+<!-- Favicons + PWA -->
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+<link rel="apple-touch-icon" href="assets/img/favicon.svg" />
+<link rel="manifest" href="manifest.json" />
+
+<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/css/style.css" />
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "NirmanBazar",
+  "alternateName": "নির্মাণবাজার",
+  "description": "Bangladesh's premier marketplace for construction materials, sanitary ware, paint, tiles, doors, electrical, kitchen and tools",
+  "url": "/",
+  "logo": "assets/img/favicon.svg",
+  "sameAs": [],
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "BD",
+    "addressLocality": "Dhaka"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+880 1700-000000",
+    "email": "hello@nirmanbazar.com",
+    "contactType": "customer support",
+    "availableLanguage": ["Bengali", "English"]
+  }
+}
+</script>
 </head>
 <body>
 
@@ -18,8 +69,8 @@
 <div class="topbar">
   <div class="container topbar__inner">
     <div class="topbar__left">
-      <span>📞 <a href="tel:+8801700000000">+880 1700-000000</a></span>
-      <span class="hide-sm">✉️ <a href="mailto:hello@nirmanbazar.com">hello@nirmanbazar.com</a></span>
+      <span>📞 <a href="tel:+8801700000000" id="topbarPhone">+880 1700-000000</a></span>
+      <span class="hide-sm">✉️ <a href="mailto:hello@nirmanbazar.com" id="topbarEmail">hello@nirmanbazar.com</a></span>
     </div>
     <div class="topbar__right">
       <span class="hide-sm">🚚 <span data-i18n="topbar.delivery">সারা বাংলাদেশে হোম ডেলিভারি</span></span>
@@ -61,8 +112,13 @@
     </form>
 
     <nav class="nav-actions">
-      <a href="#sections" class="btn btn-ghost" data-i18n="nav.categories">ক্যাটাগরি</a>
+      <a href="#sections" class="btn btn-ghost hide-md" data-i18n="nav.categories">ক্যাটাগরি</a>
       <a href="#about" class="btn btn-ghost hide-md" data-i18n="nav.about">আমাদের সম্পর্কে</a>
+      <button class="btn btn-cart" id="cartBtn" aria-label="Quote cart">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+        <span class="hide-md" data-i18n="nav.quote">কোটেশন</span>
+      </button>
       <a href="#contact" class="btn btn-primary" data-i18n="nav.contact">যোগাযোগ</a>
     </nav>
   </div>
@@ -83,7 +139,7 @@
       </p>
       <div class="hero__cta">
         <a href="#sections" class="btn btn-primary btn-lg" data-i18n="hero.cta1">ক্যাটাগরি দেখুন</a>
-        <a href="#featured" class="btn btn-outline btn-lg" data-i18n="hero.cta2">ফিচার্ড পণ্য</a>
+        <a href="#quote" class="btn btn-outline btn-lg" data-i18n="hero.cta3">কোটেশন বানান</a>
       </div>
       <div class="hero__stats" id="heroStats">
         <div class="hero__stat"><strong id="stat-products">1,275</strong><span data-i18n="hero.stat.products">পণ্য</span></div>
@@ -134,6 +190,9 @@
         <select id="sectionFilter" class="select">
           <option value="all" data-i18n="catalog.all">সকল বিভাগ</option>
         </select>
+        <select id="brandFilter" class="select">
+          <option value="all" data-i18n="catalog.all_brands">সকল ব্র্যান্ড</option>
+        </select>
         <select id="sortSelect" class="select">
           <option value="default" data-i18n="catalog.sort.default">ডিফল্ট</option>
           <option value="price_asc" data-i18n="catalog.sort.price_asc">দাম: কম থেকে বেশি</option>
@@ -149,6 +208,100 @@
 
     <div class="load-more-wrap">
       <button id="loadMore" class="btn btn-outline" data-i18n="catalog.load_more">আরও দেখুন</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUOTE BUILDER ===== -->
+<section class="section" id="quote">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow" data-i18n="quote.eye">কোটেশন বিল্ডার</span>
+      <h2 data-i18n="quote.title">নিজের কোম্পানির নামে কোটেশন বানান</h2>
+      <p data-i18n="quote.subtitle">যেকোনো পণ্য নির্বাচন করে আপনার লোগো, কোম্পানির নাম ও ঠিকানা সহ পেশাদার কোটেশন তৈরি করুন। রিসেলার হলে markup/discount সেট করুন।</p>
+    </div>
+
+    <div class="quote">
+      <div class="quote__form" id="quoteForm">
+        <h3 data-i18n="quote.company">আপনার কোম্পানির তথ্য</h3>
+        <div class="form-row">
+          <input id="qCompanyName" placeholder="কোম্পানির নাম / Company Name" />
+          <input id="qCompanyPhone" type="tel" placeholder="ফোন / Phone" />
+        </div>
+        <div class="form-row">
+          <input id="qCompanyEmail" type="email" placeholder="ইমেইল / Email" />
+          <input id="qCompanyVat" placeholder="VAT / Trade License (ঐচ্ছিক)" />
+        </div>
+        <input id="qCompanyAddress" placeholder="ঠিকানা / Address" />
+        <div class="logo-upload">
+          <label for="qLogoFile" class="logo-upload__btn"><span data-i18n="quote.upload_logo">📎 কোম্পানির লোগো আপলোড করুন</span></label>
+          <input id="qLogoFile" type="file" accept="image/*" hidden />
+          <img id="qLogoPreview" class="logo-upload__preview" alt="Logo preview" hidden />
+          <button type="button" id="qLogoClear" class="btn btn-ghost btn-sm" hidden data-i18n="quote.remove_logo">✕ সরান</button>
+        </div>
+
+        <h3 data-i18n="quote.client">ক্লায়েন্টের তথ্য (ঐচ্ছিক)</h3>
+        <div class="form-row">
+          <input id="qClientName" placeholder="ক্লায়েন্ট নাম / Client Name" />
+          <input id="qClientPhone" type="tel" placeholder="ক্লায়েন্ট ফোন / Client Phone" />
+        </div>
+        <input id="qClientAddress" placeholder="ক্লায়েন্ট ঠিকানা / Client Address" />
+
+        <h3 data-i18n="quote.settings">কোটেশন সেটিংস</h3>
+        <div class="form-row form-row--3">
+          <label class="field">
+            <span data-i18n="quote.markup">Reseller markup (%)</span>
+            <input id="qMarkup" type="number" step="0.5" value="0" />
+          </label>
+          <label class="field">
+            <span data-i18n="quote.vat">VAT (%)</span>
+            <input id="qVat" type="number" step="0.5" value="0" />
+          </label>
+          <label class="field">
+            <span data-i18n="quote.validity">Validity (days)</span>
+            <input id="qValidity" type="number" value="7" />
+          </label>
+        </div>
+        <label class="field">
+          <span data-i18n="quote.note">নোট / শর্তাবলী (ঐচ্ছিক)</span>
+          <textarea id="qNote" rows="2" placeholder="যেমন: সম্পূর্ণ অর্ডারে ৫০% অগ্রিম, বাকি ডেলিভারির সময়।"></textarea>
+        </label>
+      </div>
+
+      <div class="quote__items">
+        <h3 data-i18n="quote.items">যোগ করা পণ্যসমূহ</h3>
+        <div id="quoteEmpty" class="quote__empty">
+          <p data-i18n="quote.empty">কোনো পণ্য যোগ করেননি। ক্যাটালগ থেকে "কোটেশনে যোগ করুন" বাটনে ক্লিক করুন।</p>
+          <a href="#catalog" class="btn btn-primary" data-i18n="quote.go_catalog">ক্যাটালগে যান</a>
+        </div>
+        <div id="quoteTable" hidden>
+          <table class="quote__table">
+            <thead>
+              <tr>
+                <th data-i18n="quote.col.item">পণ্য</th>
+                <th data-i18n="quote.col.qty">পরিমাণ</th>
+                <th data-i18n="quote.col.unit_price">একক দর</th>
+                <th data-i18n="quote.col.total">মোট</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="quoteBody"></tbody>
+          </table>
+
+          <div class="quote__totals">
+            <div class="quote__row"><span data-i18n="quote.subtotal">সাবটোটাল</span><strong id="qSubtotal">৳0</strong></div>
+            <div class="quote__row" id="qMarkupRow"><span data-i18n="quote.markup_amount">Markup</span><strong id="qMarkupVal">৳0</strong></div>
+            <div class="quote__row" id="qVatRow"><span data-i18n="quote.vat_amount">VAT</span><strong id="qVatVal">৳0</strong></div>
+            <div class="quote__row quote__row--grand"><span data-i18n="quote.grand_total">গ্র্যান্ড টোটাল</span><strong id="qGrand">৳0</strong></div>
+          </div>
+
+          <div class="quote__actions">
+            <button class="btn btn-primary btn-lg" id="qPrint"><span data-i18n="quote.print">🖨 প্রিন্ট / PDF সংরক্ষণ</span></button>
+            <button class="btn btn-outline" id="qShareWa"><span data-i18n="quote.whatsapp">💬 WhatsApp শেয়ার</span></button>
+            <button class="btn btn-ghost" id="qClear"><span data-i18n="quote.clear">🗑 পরিষ্কার করুন</span></button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -180,23 +333,34 @@
       </div>
     </div>
     <div class="about__visual">
-      <div class="about__card">
-        <h3>★ 4.9/5</h3>
-        <p data-i18n="about.rating">গ্রাহক সন্তুষ্টি</p>
-      </div>
-      <div class="about__card">
-        <h3>10,000+</h3>
-        <p data-i18n="about.orders">সফল ডেলিভারি</p>
-      </div>
-      <div class="about__card">
-        <h3>500+</h3>
-        <p data-i18n="about.sellers">নিবন্ধিত বিক্রেতা</p>
-      </div>
-      <div class="about__card">
-        <h3>24/7</h3>
-        <p data-i18n="about.support">গ্রাহক সেবা</p>
-      </div>
+      <div class="about__card"><h3>★ 4.9/5</h3><p data-i18n="about.rating">গ্রাহক সন্তুষ্টি</p></div>
+      <div class="about__card"><h3>10,000+</h3><p data-i18n="about.orders">সফল ডেলিভারি</p></div>
+      <div class="about__card"><h3>500+</h3><p data-i18n="about.sellers">নিবন্ধিত বিক্রেতা</p></div>
+      <div class="about__card"><h3>24/7</h3><p data-i18n="about.support">গ্রাহক সেবা</p></div>
     </div>
+  </div>
+</section>
+
+<!-- ===== RFQ (BULK QUOTATION) ===== -->
+<section class="section section--alt" id="rfq">
+  <div class="container">
+    <div class="section__head">
+      <span class="eyebrow" data-i18n="rfq.eye">বাল্ক RFQ</span>
+      <h2 data-i18n="rfq.title">বাল্ক অর্ডার বা প্রজেক্টের জন্য কোটেশন চান?</h2>
+      <p data-i18n="rfq.subtitle">আপনার তালিকা/BOQ আপলোড করুন বা লিখে পাঠান — আমরা ২৪ ঘন্টায় কোটেশন দেব।</p>
+    </div>
+    <form id="rfqForm" class="rfq__form">
+      <div class="form-row">
+        <input id="rfqName" required placeholder="আপনার নাম / Your Name" />
+        <input id="rfqCompany" placeholder="কোম্পানির নাম / Company" />
+      </div>
+      <div class="form-row">
+        <input id="rfqPhone" required type="tel" placeholder="মোবাইল / Phone" />
+        <input id="rfqEmail" type="email" placeholder="ইমেইল / Email" />
+      </div>
+      <textarea id="rfqList" required rows="5" placeholder="পণ্যের তালিকা: যেমন 100 ব্যাগ সিমেন্ট, 50 পিস ৪” পাইপ, 200 sft টাইলস ইত্যাদি"></textarea>
+      <button class="btn btn-primary btn-lg" type="submit" data-i18n="rfq.send">📤 RFQ পাঠান</button>
+    </form>
   </div>
 </section>
 
@@ -208,20 +372,51 @@
       <h2 data-i18n="contact.title">আজই আমাদের সাথে কথা বলুন</h2>
       <p data-i18n="contact.sub">প্রকল্পের জন্য পরামর্শ, বাল্ক অর্ডার বা পণ্যের বিশদ জানতে আমাদের সাথে যোগাযোগ করুন।</p>
       <ul class="contact__list">
-        <li>📞 <a href="tel:+8801700000000">+880 1700-000000</a></li>
-        <li>✉️ <a href="mailto:hello@nirmanbazar.com">hello@nirmanbazar.com</a></li>
-        <li>📍 <span data-i18n="contact.addr">ঢাকা, বাংলাদেশ</span></li>
+        <li>📞 <a href="tel:+8801700000000" id="contactPhone">+880 1700-000000</a></li>
+        <li>💬 <a href="https://wa.me/8801700000000" id="contactWhatsapp" target="_blank" rel="noopener">WhatsApp: +880 1700-000000</a></li>
+        <li>✉️ <a href="mailto:hello@nirmanbazar.com" id="contactEmail">hello@nirmanbazar.com</a></li>
+        <li>📍 <span data-i18n="contact.addr" id="contactAddr">ঢাকা, বাংলাদেশ</span></li>
         <li>⏰ <span data-i18n="contact.hours">সকাল ৯টা — রাত ৯টা (প্রতিদিন)</span></li>
       </ul>
     </div>
-    <form class="contact__form" onsubmit="event.preventDefault(); alert('ধন্যবাদ! আমরা শীঘ্রই যোগাযোগ করব।'); this.reset();">
+    <form id="contactForm" class="contact__form">
       <div class="form-row">
-        <input required placeholder="আপনার নাম / Your Name" />
-        <input required type="tel" placeholder="মোবাইল নম্বর / Phone" />
+        <input id="cName" required placeholder="আপনার নাম / Your Name" />
+        <input id="cPhone" required type="tel" placeholder="মোবাইল নম্বর / Phone" />
       </div>
-      <input type="email" placeholder="ইমেইল (ঐচ্ছিক)" />
-      <textarea rows="4" required placeholder="আপনার প্রশ্ন বা চাহিদা লিখুন..."></textarea>
+      <input id="cEmail" type="email" placeholder="ইমেইল (ঐচ্ছিক)" />
+      <textarea id="cMessage" rows="4" required placeholder="আপনার প্রশ্ন বা চাহিদা লিখুন..."></textarea>
       <button class="btn btn-primary btn-lg" type="submit" data-i18n="contact.send">বার্তা পাঠান</button>
+    </form>
+  </div>
+</section>
+
+<!-- ===== BECOME A SUPPLIER ===== -->
+<section class="section section--dark" id="supplier">
+  <div class="container supplier__grid">
+    <div>
+      <span class="eyebrow" data-i18n="supplier.eye">সাপ্লায়ার?</span>
+      <h2 data-i18n="supplier.title">আপনার পণ্য আমাদের প্ল্যাটফর্মে যোগ করুন</h2>
+      <p data-i18n="supplier.subtitle">আপনি যদি প্রস্তুতকারক, পরিবেশক বা খুচরা বিক্রেতা হন, আমাদের প্ল্যাটফর্মে যুক্ত হয়ে দেশজুড়ে গ্রাহকদের কাছে পৌঁছে যান। কমিশন স্বচ্ছ, পেমেন্ট সাপ্তাহিক।</p>
+      <div class="about__features">
+        <div>✓ <span data-i18n="supplier.f1">দেশজুড়ে দৃশ্যমানতা</span></div>
+        <div>✓ <span data-i18n="supplier.f2">নিজস্ব সেলার পেজ</span></div>
+        <div>✓ <span data-i18n="supplier.f3">যাচাইকৃত ব্যাজ</span></div>
+        <div>✓ <span data-i18n="supplier.f4">২৪/৭ সাপোর্ট</span></div>
+      </div>
+    </div>
+    <form id="supplierForm" class="contact__form">
+      <div class="form-row">
+        <input id="sName" required placeholder="আপনার নাম / Name" />
+        <input id="sCompany" required placeholder="কোম্পানির নাম / Company" />
+      </div>
+      <div class="form-row">
+        <input id="sPhone" required type="tel" placeholder="মোবাইল / Phone" />
+        <input id="sEmail" type="email" placeholder="ইমেইল / Email" />
+      </div>
+      <input id="sCategory" placeholder="আপনার পণ্যের ক্যাটাগরি (যেমন: টাইলস, পেইন্ট)" />
+      <textarea id="sDescription" rows="3" required placeholder="পণ্য ও কোম্পানির সংক্ষিপ্ত বিবরণ"></textarea>
+      <button class="btn btn-primary btn-lg" type="submit" data-i18n="supplier.submit">সাপ্লায়ার হিসেবে আবেদন</button>
     </form>
   </div>
 </section>
@@ -248,18 +443,20 @@
     <div>
       <h4 data-i18n="footer.links">দ্রুত লিংক</h4>
       <ul>
+        <li><a href="#sections" data-i18n="nav.categories">ক্যাটাগরি</a></li>
+        <li><a href="#quote" data-i18n="nav.quote">কোটেশন বিল্ডার</a></li>
+        <li><a href="#rfq" data-i18n="nav.rfq">বাল্ক RFQ</a></li>
+        <li><a href="#supplier" data-i18n="nav.supplier">সাপ্লায়ার হোন</a></li>
         <li><a href="#about" data-i18n="nav.about">আমাদের সম্পর্কে</a></li>
         <li><a href="#contact" data-i18n="nav.contact">যোগাযোগ</a></li>
-        <li><a href="#sections" data-i18n="nav.categories">ক্যাটাগরি</a></li>
-        <li><a href="#featured" data-i18n="featured.title">ফিচার্ড</a></li>
       </ul>
     </div>
     <div>
       <h4 data-i18n="footer.contact">যোগাযোগ</h4>
       <ul>
-        <li>📞 +880 1700-000000</li>
-        <li>✉️ hello@nirmanbazar.com</li>
-        <li>📍 <span data-i18n="contact.addr">ঢাকা, বাংলাদেশ</span></li>
+        <li>📞 <a href="tel:+8801700000000" id="footerPhone">+880 1700-000000</a></li>
+        <li>✉️ <a href="mailto:hello@nirmanbazar.com" id="footerEmail">hello@nirmanbazar.com</a></li>
+        <li>📍 <span data-i18n="contact.addr" id="footerAddr">ঢাকা, বাংলাদেশ</span></li>
       </ul>
     </div>
   </div>
@@ -279,6 +476,9 @@
     <div class="modal__content" id="modalContent"></div>
   </div>
 </div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <!-- Back-to-top -->
 <button class="to-top" id="toTop" aria-label="Back to top">↑</button>

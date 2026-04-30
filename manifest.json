@@ -1,0 +1,21 @@
+{
+  "name": "NirmanBazar · নির্মাণবাজার",
+  "short_name": "NirmanBazar",
+  "description": "Bangladesh's premier construction materials marketplace — 1,275+ products, build branded quotations.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b1a2b",
+  "theme_color": "#0b1a2b",
+  "icons": [
+    {
+      "src": "assets/img/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "lang": "bn",
+  "scope": "/",
+  "categories": ["business", "shopping"]
+}
