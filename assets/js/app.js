@@ -517,6 +517,20 @@
     'others':                 { c1: '#0b1a2b', c2: '#13263d', icon: '📦' },
   };
 
+  // Read the dedicated WhatsApp number (digits only, no '+') from the
+  // #contactWhatsapp anchor's href (https://wa.me/<digits>). Falls back to
+  // the topbar phone if the WhatsApp anchor is missing. Phone and WhatsApp
+  // can be different numbers, so wa.me URLs must NOT use #topbarPhone.
+  function getWaPhone() {
+    const wa = document.querySelector('#contactWhatsapp');
+    if (wa) {
+      const m = (wa.getAttribute('href') || '').match(/wa\.me\/(\d+)/);
+      if (m) return m[1];
+    }
+    const phone = (document.querySelector('#topbarPhone')?.textContent || '+8801700000000');
+    return phone.replace(/[^0-9]/g, '');
+  }
+
   function placeholder(title, section) {
     const s = SECTION_STYLE[section] || SECTION_STYLE['others'];
     const letter = String(title || 'N').replace(/[^A-Za-z0-9]/g, '')[0] || 'N';
@@ -565,7 +579,7 @@
         </div>
         <div class="prod__cta">
           <button class="btn btn-cta-add ${inCart ? 'added' : ''}" data-action="add" type="button"><span>${inCart ? t('prod.in_quote') : t('prod.add_quote')}</span></button>
-          <a class="btn btn-cta-wa" href="https://wa.me/${phone.replace('+','')}?text=${encodeURIComponent('Inquiry: ' + p.title)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="${t('prod.whatsapp')}">💬</a>
+          <a class="btn btn-cta-wa" href="https://wa.me/${getWaPhone()}?text=${encodeURIComponent('Inquiry: ' + p.title)}" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="${t('prod.whatsapp')}">💬</a>
           <a class="btn btn-cta-call" href="tel:${phone}" onclick="event.stopPropagation()" title="${t('prod.call')}">📞</a>
         </div>
       </article>
@@ -684,7 +698,7 @@
         <p class="modal__desc">${esc(desc || p.title)}</p>
         <div class="modal__cta">
           <button class="btn btn-primary btn-lg" id="modalAddQuote" type="button" ${inCart ? 'disabled' : ''}>${inCart ? t('prod.in_quote') : t('prod.add_quote')}</button>
-          <a class="btn btn-outline btn-lg" href="https://wa.me/${phone.replace('+','')}?text=${encodeURIComponent('Inquiry: ' + p.title + ' — ' + shareUrl)}" target="_blank" rel="noopener">${t('prod.whatsapp')}</a>
+          <a class="btn btn-outline btn-lg" href="https://wa.me/${getWaPhone()}?text=${encodeURIComponent('Inquiry: ' + p.title + ' — ' + shareUrl)}" target="_blank" rel="noopener">${t('prod.whatsapp')}</a>
           <a class="btn btn-outline btn-lg" href="tel:${phone}">${t('modal.call')}</a>
           <button class="btn btn-ghost btn-lg" id="modalShare" type="button">🔗 ${t('modal.share')}</button>
         </div>
@@ -1056,7 +1070,7 @@ ${note ? `<div class="note"><strong>${LANG==='bn'?'নোট / শর্তা�
     persistQuoteFields();
     if (CART.length === 0) { showToast(t('quote.empty')); return; }
     const r = quoteRefs();
-    const phone = ($('#topbarPhone')?.textContent || '+8801700000000').replace(/[^0-9+]/g, '').replace('+','');
+    const phone = getWaPhone();
     let sub = 0;
     const lines = CART.map((c, i) => {
       const p = DATA.listings.find(x => x.id === c.id);
@@ -1133,7 +1147,7 @@ ${note ? `<div class="note"><strong>${LANG==='bn'?'নোট / শর্তা�
       const name = $('#rfqName').value, comp = $('#rfqCompany').value, ph = $('#rfqPhone').value, em = $('#rfqEmail').value, list = $('#rfqList').value;
       const body = `RFQ\nName: ${name}\nCompany: ${comp}\nPhone: ${ph}\nEmail: ${em}\n\nItems:\n${list}`;
       // Open WhatsApp pre-filled (preferred)
-      window.open(`https://wa.me/${phone.replace('+','')}?text=${encodeURIComponent(body)}`, '_blank');
+      window.open(`https://wa.me/${getWaPhone()}?text=${encodeURIComponent(body)}`, '_blank');
       // Also offer mailto fallback
       try { window.location.href = `mailto:${email}?subject=${encodeURIComponent('RFQ from ' + (comp||name))}&body=${encodeURIComponent(body)}`; } catch {}
       rf.reset();
