@@ -302,11 +302,13 @@
     CART.push({ id, qty: 1 });
     saveCart();
     updateCartBadge();
+    if (typeof renderQuote === 'function') renderQuote();
   }
   function cartRemove(id) {
     CART = CART.filter(c => c.id !== id);
     saveCart();
     updateCartBadge();
+    if (typeof renderQuote === 'function') renderQuote();
   }
   function cartSetQty(id, qty) {
     const c = cartGet(id);
