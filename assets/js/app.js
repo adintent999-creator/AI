@@ -898,7 +898,6 @@
       btn.addEventListener('click', () => {
         const id = btn.closest('tr').getAttribute('data-id');
         cartRemove(id);
-        renderQuote();
         showToast(t('quote.removed'));
       });
     });
