@@ -205,8 +205,9 @@
     }
   };
 
-  let LANG = (localStorage.getItem('nb_lang') || 'bn');
-  function t(key) { return I18N[LANG][key] || I18N.bn[key] || key; }
+  let LANG = localStorage.getItem('nb_lang') || 'bn';
+  if (!I18N[LANG]) LANG = 'bn';
+  function t(key) { return (I18N[LANG] && I18N[LANG][key]) || I18N.bn[key] || key; }
   function setLang(l) {
     LANG = l;
     localStorage.setItem('nb_lang', l);
@@ -576,6 +577,7 @@
     const realSrc = img.getAttribute('data-src');
     if (!realSrc) return;
     img.removeAttribute('data-src');
+    upgradeActive++;
     const loader = new Image();
     loader.onload = () => { img.src = realSrc; upgradeActive--; pump(); };
     loader.onerror = () => { upgradeActive--; pump(); };
@@ -585,7 +587,6 @@
     while (upgradeQueue.length && upgradeActive < UPGRADE_CONCURRENCY) {
       const img = upgradeQueue.shift();
       if (!img || !img.getAttribute('data-src')) continue;
-      upgradeActive++;
       upgradeImage(img);
     }
   }
@@ -694,7 +695,7 @@
     // update URL hash for share
     try { history.replaceState({}, '', '?p=' + encodeURIComponent(p.id) + '#prod'); } catch {}
     const mi = $('#modalImg');
-    if (mi) { upgradeActive++; upgradeImage(mi); }
+    if (mi) upgradeImage(mi);
     const addBtn = $('#modalAddQuote');
     if (addBtn) addBtn.addEventListener('click', () => {
       if (cartHas(p.id)) return;
