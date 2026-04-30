@@ -385,7 +385,9 @@
       el.addEventListener('click', () => {
         currentSection = el.getAttribute('data-section');
         currentCategory = 'all';
+        currentBrand = 'all';
         $('#sectionFilter').value = currentSection;
+        const bf0 = $('#brandFilter'); if (bf0) bf0.value = 'all';
         renderChips();
         applyFilters();
         $('#catalog').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -649,7 +651,9 @@
         e.preventDefault();
         currentSection = a.getAttribute('data-sec');
         currentCategory = 'all';
+        currentBrand = 'all';
         $('#sectionFilter').value = currentSection;
+        const bf0 = $('#brandFilter'); if (bf0) bf0.value = 'all';
         renderChips();
         applyFilters();
         $('#catalog').scrollIntoView({ behavior: 'smooth' });
@@ -827,19 +831,52 @@
       `;
     }).join('');
 
+    // Live update on every keystroke without DOM replacement (preserves focus).
+    // Only the affected row's total + the summary totals are touched.
+    function liveUpdate(tr) {
+      const id = tr.getAttribute('data-id');
+      const c = cartGet(id);
+      if (!c) return;
+      const p = DATA.listings.find(x => x.id === id);
+      if (!p) return;
+      const base = priceForCart(p);
+      const unit = c.override != null ? Number(c.override) : base;
+      const total = unit * (c.qty || 1);
+      const totalCell = tr.querySelector('.quote__total');
+      if (totalCell) totalCell.textContent = fmtMoney(total);
+      // Recompute grand totals
+      const sub = CART.reduce((s, cc) => {
+        const pp = DATA.listings.find(x => x.id === cc.id);
+        const bb = priceForCart(pp || {});
+        const uu = cc.override != null ? Number(cc.override) : bb;
+        return s + uu * (cc.qty || 1);
+      }, 0);
+      const mPct = Number(r.markup.value) || 0;
+      const vPct = Number(r.vat.value) || 0;
+      const mAmt = sub * mPct / 100;
+      const vAmt = (sub + mAmt) * vPct / 100;
+      r.subtotal.textContent = fmtMoney(sub);
+      r.markupVal.textContent = (mPct >= 0 ? '+' : '') + fmtMoney(mAmt);
+      r.vatVal.textContent = fmtMoney(vAmt);
+      r.grand.textContent = fmtMoney(sub + mAmt + vAmt);
+    }
     r.body.querySelectorAll('[data-action="qty"]').forEach(inp => {
       inp.addEventListener('input', () => {
-        const id = inp.closest('tr').getAttribute('data-id');
-        cartSetQty(id, inp.value);
-        renderQuote();
+        const tr = inp.closest('tr');
+        cartSetQty(tr.getAttribute('data-id'), inp.value);
+        liveUpdate(tr);
       });
+      // On commit (blur/Enter), do a full re-render so any derived UI (like
+      // the "base" hint next to an overridden price) refreshes.
+      inp.addEventListener('change', () => renderQuote());
     });
     r.body.querySelectorAll('[data-action="price"]').forEach(inp => {
       inp.addEventListener('input', () => {
-        const id = inp.closest('tr').getAttribute('data-id');
-        cartSetOverride(id, inp.value);
-        renderQuote();
+        const tr = inp.closest('tr');
+        cartSetOverride(tr.getAttribute('data-id'), inp.value);
+        liveUpdate(tr);
       });
+      inp.addEventListener('change', () => renderQuote());
     });
     r.body.querySelectorAll('[data-action="remove"]').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1125,7 +1162,12 @@ ${note ? `<div class="note"><strong>${LANG==='bn'?'নোট / শর্তা�
     $('#searchInput').addEventListener('input', () => { clearTimeout(tmo); tmo = setTimeout(doSearch, 300); });
 
     $('#sectionFilter').addEventListener('change', e => {
-      currentSection = e.target.value; currentCategory = 'all'; renderChips(); applyFilters();
+      currentSection = e.target.value;
+      currentCategory = 'all';
+      currentBrand = 'all';
+      const bf2 = $('#brandFilter'); if (bf2) bf2.value = 'all';
+      renderChips();
+      applyFilters();
     });
     const bf = $('#brandFilter');
     if (bf) bf.addEventListener('change', e => { currentBrand = e.target.value; applyFilters(); });
