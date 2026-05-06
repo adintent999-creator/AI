@@ -139,8 +139,15 @@ def download_one(idx: int, p: dict) -> tuple[int, dict, str]:
         return idx, p, "no-url"
 
     h = short_hash(url)
-    # Try to find an existing file with this hash regardless of extension
+    # Try to find an existing file with this hash regardless of extension.
+    # Skip *.part temp files left from interrupted previous runs.
     for existing in IMG_DIR.glob(f"{h}.*"):
+        if existing.name.endswith(".part"):
+            try:
+                existing.unlink()
+            except OSError:
+                pass
+            continue
         p["image_local"] = str(existing).replace("\\", "/")
         return idx, p, "linked"
 
@@ -193,8 +200,9 @@ def main() -> int:
         futures = [ex.submit(download_one, i, p) for i, p in todo]
         for fut in as_completed(futures):
             if interrupted.is_set():
-                # Don't cancel; let in-flight ones finish, but stop submitting new info.
-                pass
+                for f in futures:
+                    f.cancel()
+                break
             try:
                 idx, mutated, status = fut.result()
             except Exception as e:
