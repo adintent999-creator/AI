@@ -123,7 +123,7 @@ def fetch(url: str) -> tuple[bytes, str]:
         except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, ConnectionError) as e:
             last_err = e
             if attempt < RETRIES_PER_URL - 1:
-                time.sleep(BACKOFF_SECONDS[attempt])
+                time.sleep(BACKOFF_SECONDS[min(attempt, len(BACKOFF_SECONDS) - 1)])
     raise RuntimeError(f"failed after {RETRIES_PER_URL} attempts: {last_err}")
 
 
