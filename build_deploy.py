@@ -63,9 +63,9 @@ USER_AGENT = (
     "Mozilla/5.0 (Linux; Android 13; Termux) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36"
 )
-TIMEOUT = 25
-MAX_WORKERS = 4              # be polite — CDN rate-limits aggressively
-RETRIES_PER_URL = 3
+TIMEOUT = int(os.environ.get("NB_TIMEOUT", "25"))
+MAX_WORKERS = int(os.environ.get("NB_WORKERS", "4"))   # bump on a fast network: NB_WORKERS=10
+RETRIES_PER_URL = int(os.environ.get("NB_RETRIES", "3"))
 BACKOFF_SECONDS = (2, 5, 12)  # progressive
 PROGRESS_EVERY = 25
 
@@ -177,11 +177,23 @@ def main() -> int:
     total = len(listings)
     log(f"Loaded {total:,} listings from {PRODUCTS_JSON}")
 
-    todo = [
+    # Build the work list, then dedupe by URL so the same image is fetched only once
+    # even if multiple products reference it. Listings sharing a URL all get pointed
+    # at the same final local file.
+    raw_todo = [
         (i, p) for i, p in enumerate(listings)
         if not already_local(p.get("image_local")) and (p.get("image") or "").startswith("http")
     ]
-    log(f"To download: {len(todo):,}  ·  already local: {total - len(todo):,}")
+    by_url: dict[str, list[int]] = {}
+    for i, p in raw_todo:
+        by_url.setdefault(p["image"].strip(), []).append(i)
+    unique_urls = list(by_url.keys())
+    todo = [(by_url[u][0], listings[by_url[u][0]]) for u in unique_urls]
+    dup_savings = len(raw_todo) - len(todo)
+
+    log(f"To download (unique URLs): {len(todo):,}  ·  already local: {total - len(raw_todo):,}")
+    if dup_savings:
+        log(f"Deduped {dup_savings} listings sharing image URLs (will reuse each download).")
     log(f"Concurrency: {MAX_WORKERS}  ·  retries/URL: {RETRIES_PER_URL}\n")
 
     results = {"ok": 0, "kept": 0, "linked": 0, "no-url": 0, "fail": 0}
@@ -211,6 +223,13 @@ def main() -> int:
                 done += 1
                 continue
             listings[idx] = mutated
+            # Mirror the resolved image_local to every other listing that shared this URL
+            shared_url = (mutated.get("image") or "").strip()
+            local_path = mutated.get("image_local")
+            if local_path and shared_url and shared_url in by_url:
+                for j in by_url[shared_url]:
+                    if j != idx:
+                        listings[j]["image_local"] = local_path
             key = status.split(":", 1)[0]
             results[key] = results.get(key, 0) + 1
             if status.startswith("fail"):
